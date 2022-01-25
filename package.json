@@ -8,7 +8,7 @@
     "lint:eslint:fix": "run-p lint:eslint -- --fix",
     "lint:fix": "run-p lint:eslint:fix lint:typescript",
     "lint": "run-p lint:typescript lint:eslint",
-    "link:folder": "ln -sf ~/Library/Mobile Documents/iCloud~dk~simonbs~Scriptable/Documents ./scriptable"
+    "link:folder": "ts-node ./scripts/link-scriptable-folder-to-project.ts"
   },
   "devDependencies": {
     "@scriptable-ios/eslint-config": "~1.6.4",

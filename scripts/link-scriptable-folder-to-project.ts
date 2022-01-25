@@ -1,46 +1,50 @@
-// create symlink
 import fs from 'fs/promises'
 import path from 'path'
 import { homedir } from 'os'
+import * as process from 'process'
 
-const SCRIPTABLE_FOLDER_PATH = path.join(homedir(), "/Library/Mobile\ Documents/iCloud\~dk\~simonbs\~Scriptable/Documents")
+const SCRIPTABLE_ICLOUD_DOCUMENTS_PATH = path.join(
+  homedir(),
+  'Library',
+  'Mobile Documents',
+  'iCloud~dk~simonbs~Scriptable',
+  'Documents'
+)
 
-const createSymlink = async (
-  source: string,
-  target: string,
-): Promise<void> => {
-  const sourcePath = path.resolve(source)
-  const targetPath = path.resolve(target)
+const SCRIPTABLE_SYMLINK_FOLDER = path.join(__dirname, '..', 'scriptable')
 
-  try {
-    await fs.access(sourcePath)
-  } catch (error) {
-    console.error(error)
-    throw new Error("Could not access Scriptable folder.")
-  }
-
-  try {
-    await fs.rm(targetPath, { recursive: true })
-    await fs.mkdir(targetPath, { recursive: true })
-    await fs.symlink(sourcePath, targetPath)
-  } catch (error) {
-    console.error("Could not create symlink.", error)
-    return
-  }
-
-}
-
-const main = async () => {
+const symlinkScriptableDocumentsFolderToLocalProject = async () => {
   if (process.platform !== 'darwin') {
     throw new Error(`
       # Scriptable is only supported on macOS.
 
-      Please make sure you are running this script on a macOS host with the latest version of 
+      Please make sure you are running this script on a macOS host with the latest version of
       scriptable installed. https://scriptable.app/mac-beta/
     `)
   }
 
-  await createSymlink(SCRIPTABLE_FOLDER_PATH, "../../scriptable")
+  try {
+    await fs.access(SCRIPTABLE_ICLOUD_DOCUMENTS_PATH)
+  } catch {
+    throw new Error(`
+      Could not access scriptable iCloud folder at: ${SCRIPTABLE_ICLOUD_DOCUMENTS_PATH}.
+    `)
+  }
+
+  try {
+    await fs.access(SCRIPTABLE_SYMLINK_FOLDER)
+    await fs.rm(SCRIPTABLE_SYMLINK_FOLDER, { recursive: true })
+  } catch {}
+
+  await fs.symlink(SCRIPTABLE_ICLOUD_DOCUMENTS_PATH, SCRIPTABLE_SYMLINK_FOLDER)
 }
 
-main()
+symlinkScriptableDocumentsFolderToLocalProject()
+  .then(() => {
+    console.log(`Successfully linked scriptable folder to local project.`)
+    process.exit(0)
+  })
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
