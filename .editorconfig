@@ -9,11 +9,9 @@ end_of_line = lf
 insert_final_newline = true
 charset = utf-8
 trim_trailing_whitespace = true
-soft_wrap = true
 max_line_length = 80
-
-[*.js]
 indent_style = space
+tab_width = 2
 indent_size = 2
 
 # Tab indentation (no size specified)
@@ -21,5 +19,4 @@ indent_size = 2
 indent_style = tab
 
 [*.{json,yml,yaml}]
-indent_style = space
 indent_size = 4
