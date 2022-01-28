@@ -1,30 +1,32 @@
 {
-  "name": "scriptable-scripts",
-  "version": "0.0.0",
-  "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "lint:typescript": "tsc -noEmit",
-    "lint:eslint": "eslint --cache --ext .ts,js,tsx,jsx ./src",
-    "lint:eslint:fix": "run-p lint:eslint -- --fix",
-    "lint:fix": "run-p lint:eslint:fix lint:typescript",
-    "lint": "run-p lint:typescript lint:eslint",
-    "link:folder": "ts-node ./scripts/link-scriptable-folder-to-project.ts"
-  },
-  "devDependencies": {
-    "@scriptable-ios/eslint-config": "~1.6.4",
-    "@types/scriptable-ios": "~1.6.4",
-    "@typescript-eslint/eslint-plugin": "~5.10.1",
-    "@typescript-eslint/parser": "~5.10.1",
-    "eslint": "~7.32.0",
-    "eslint-config-prettier": "~8.3.0",
-    "eslint-config-standard": "~16.0.3",
-    "eslint-config-xo": "~0.39.0",
-    "eslint-plugin-import": "~2.25.4",
-    "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-promise": "~5.2.0",
-    "npm-run-all": "~4.1.5",
-    "prettier": "~2.5.1",
-    "ts-node": "~10.4.0",
-    "typescript": "~4.5.5"
-  }
+    "name": "scriptable-scripts",
+    "version": "0.0.0",
+    "scripts": {
+        "debug": "ts-node --inspect-brk ./src/index.ts",
+        "build": "tsc -p tsconfig.json",
+        "lint:typescript": "tsc -noEmit",
+        "lint:eslint": "eslint --cache --ext .ts,js,tsx,jsx ./src",
+        "lint:eslint:fix": "run-p lint:eslint -- --fix",
+        "lint:fix": "run-p lint:eslint:fix lint:typescript",
+        "lint": "run-p lint:typescript lint:eslint",
+        "link:folder": "ts-node ./scripts/link-scriptable-folder-to-project.ts"
+    },
+    "devDependencies": {
+        "@scriptable-ios/eslint-config": "~1.6.4",
+        "@types/scriptable-ios": "~1.6.4",
+        "@typescript-eslint/eslint-plugin": "~5.10.1",
+        "@typescript-eslint/parser": "~5.10.1",
+        "esbuild": "~0.14.14",
+        "eslint": "~7.32.0",
+        "eslint-config-prettier": "~8.3.0",
+        "eslint-config-standard": "~16.0.3",
+        "eslint-config-xo": "~0.39.0",
+        "eslint-plugin-import": "~2.25.4",
+        "eslint-plugin-node": "~11.1.0",
+        "eslint-plugin-promise": "~5.2.0",
+        "npm-run-all": "~4.1.5",
+        "prettier": "~2.5.1",
+        "ts-node": "~10.4.0",
+        "typescript": "~4.5.5"
+    }
 }
