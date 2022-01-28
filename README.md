@@ -10,7 +10,7 @@ Simply run:
 
 ```
 npm run link:scriptable
-`
+```
 
 To link your Scriptable iCloud folder with your local project. This will create a symlink, which in simple words, will create an shortcut to the original folder, so everything you see in there, is what you have in your scriptable documents.
 
