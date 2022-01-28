@@ -8,7 +8,7 @@ If you use *iOS* and *Scriptable* and want to have you fully customized editor o
 
 Simply run:
 
-`
+```
 npm run link:scriptable
 `
 
