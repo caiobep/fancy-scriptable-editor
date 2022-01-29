@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "debug": "ts-node --inspect-brk ./src/index.ts",
-    "build": "tsc -p tsconfig.json",
+    "build": "run-s lint build:scriptable",
+    "build:scriptable": "ts-node ./scripts/build-scriptable-files.ts",
     "lint:typescript": "tsc -noEmit",
     "lint:eslint": "eslint --cache --ext .ts,js,tsx,jsx ./src",
     "lint:eslint:fix": "run-p lint:eslint -- --fix",
     "lint:fix": "run-p lint:eslint:fix lint:typescript",
     "lint": "run-p lint:typescript lint:eslint",
-    "link:folder": "ts-node ./scripts/link-scriptable-folder-to-project.ts"
+    "link:folder": "ts-node ./scripts/link-scriptable-folder-to-project.ts",
+    "postinstall": "npm run link:folder"
   },
   "devDependencies": {
     "@scriptable-ios/eslint-config": "~1.6.4",
